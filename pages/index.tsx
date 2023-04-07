@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Image src="/adaptive-icon.png" alt="Iron Wolf Logo" fill sizes="100%" style={{ objectFit: "contain", opacity: 0.15, zIndex: 0 }} />
         <h1>Iron Wolf Backend</h1>
         <p>Iron Wolf Fitness Personal Api</p>
         <div>

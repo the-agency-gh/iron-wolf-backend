@@ -38,6 +38,11 @@ a{
   position:relative;
   color: #9fc3e0;
 }
+h1,
+p,
+a{
+  z-index: 1;
+}
 a::after{
     content:'';
     position:absolute;
