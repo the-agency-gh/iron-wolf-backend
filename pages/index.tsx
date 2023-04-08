@@ -51,10 +51,10 @@ export default function Home() {
             </a>
           </p>
         </div>
-        <button style={{ zIndex: 2 }} onClick={handleTest}>
+        {/* <button style={{ zIndex: 2 }} onClick={handleTest}>
           Test
         </button>
-        <pre style={{ width: "100%" }}>{dd}</pre>
+        <pre style={{ width: "100%" }}>{dd}</pre> */}
       </main>
     </>
   );
