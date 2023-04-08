@@ -10,7 +10,10 @@ type submissionProps = {
   lastName: string;
   email: string;
   phoneNumber: string;
-  dataOfBirth: string;
+  dateOfBirth: string;
+  profileBase64: string;
+  photoIdBase64: string;
+  pdfBase64: string;
 };
 type reqBody = {
   host: string;
@@ -26,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   if (req.headers.authorization !== `bearer ${process.env.API_TOKEN}`) {
     res.status(401).json({ status: "UNAUTHORIZED" });
   }
-  const { host, email, password, designatedEmail, pdfBase64, clientInfo }: reqBody = req.body;
+  const { host, email, password, designatedEmail, clientInfo }: reqBody = req.body;
   const transporter = nodemailer.createTransport({
     host,
     port: 587,
@@ -55,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     </p>
   <hr>
     <p style="font-size:1.1rem">
-    Date of Birth: <b>${clientInfo.dataOfBirth}</b>
+    Date of Birth: <b>${clientInfo.dateOfBirth}</b>
     </p>
   </div>
   `;
@@ -68,13 +71,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     Last Name: ${clientInfo.lastName}
     Email: ${clientInfo.email}
     Phone Number: ${clientInfo.phoneNumber}
-    Date of Birth: ${clientInfo.dataOfBirth}
+    Date of Birth: ${clientInfo.dateOfBirth}
     `,
     html,
     attachments: [
       {
+        filename: `${clientInfo.firstName}_${clientInfo.lastName}-profile.jpg`,
+        content: clientInfo.profileBase64,
+        contentType: "image/jpeg",
+        encoding: "base64",
+      },
+      {
+        filename: `${clientInfo.firstName}_${clientInfo.lastName}-photoId.jpg`,
+        content: clientInfo.photoIdBase64,
+        contentType: "image/jpeg",
+        encoding: "base64",
+      },
+      {
         filename: `WaiverForm-${clientInfo.firstName}_${clientInfo.lastName}.pdf`,
-        content: pdfBase64,
+        content: clientInfo.pdfBase64,
         contentType: "application/pdf",
         encoding: "base64",
       },
