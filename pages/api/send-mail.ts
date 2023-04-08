@@ -25,17 +25,12 @@ type reqBody = {
   [rest: string]: any;
 };
 
-const API_TOKEN = process.env.API_TOKEN;
 export default async function handler(req: NextApiRequest, res: NextApiResponse<resData>) {
-  console.log(req.headers);
-  if (req.headers.authorization !== `bearer ${API_TOKEN}`) {
+  if (req.headers.authorization !== `bearer ${process.env.API_TOKEN}`) {
     res.status(401).json({ status: "UNAUTHORIZED" });
     return;
   }
   const { host, email, password, designatedEmail, clientInfo }: reqBody = req.body;
-  // console.log("pdf", clientInfo.pdfBase64);
-  // console.log("image1", clientInfo.profileBase64);
-  // console.log("psavasvasvdf", clientInfo.photoIdBase64);
   const transporter = nodemailer.createTransport({
     host,
     port: 587,
