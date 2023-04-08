@@ -26,7 +26,7 @@ type reqBody = {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<resData>) {
-  if (req.headers.authorization !== `bearer ${process.env.API_TOKEN}`) {
+  if (req.headers.Authorization !== `bearer ${process.env.API_TOKEN}`) {
     res.status(401).json({ status: "UNAUTHORIZED" });
   }
   const { host, email, password, designatedEmail, clientInfo }: reqBody = req.body;
