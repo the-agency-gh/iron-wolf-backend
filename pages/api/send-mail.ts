@@ -96,6 +96,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       },
     ],
   };
+  console.log(req.body, "body");
   try {
     await transporter.sendMail(message);
     res.status(200).json({ status: "successful" });
