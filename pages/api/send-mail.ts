@@ -100,7 +100,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     await transporter.sendMail(message);
     res.status(200).json({ status: "successful" });
   } catch (err) {
-    console.log(err);
+    console.log(JSON.stringify(err, null, 2));
     res.status(500).json({ status: "failed" });
   }
 }
