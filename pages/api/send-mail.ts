@@ -25,11 +25,17 @@ type reqBody = {
   [rest: string]: any;
 };
 
+const API_TOKEN = process.env.API_TOKEN;
 export default async function handler(req: NextApiRequest, res: NextApiResponse<resData>) {
-  if (req.headers.Authorization !== `bearer ${process.env.API_TOKEN}`) {
+  console.log(req.headers);
+  if (req.headers.authorization !== `bearer ${API_TOKEN}`) {
     res.status(401).json({ status: "UNAUTHORIZED" });
+    return;
   }
   const { host, email, password, designatedEmail, clientInfo }: reqBody = req.body;
+  // console.log("pdf", clientInfo.pdfBase64);
+  // console.log("image1", clientInfo.profileBase64);
+  // console.log("psavasvasvdf", clientInfo.photoIdBase64);
   const transporter = nodemailer.createTransport({
     host,
     port: 587,
@@ -77,19 +83,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     attachments: [
       {
         filename: `${clientInfo.firstName}_${clientInfo.lastName}-profile.jpg`,
-        content: clientInfo.profileBase64,
+        content: clientInfo.profileBase64 || "",
         contentType: "image/jpeg",
         encoding: "base64",
       },
       {
         filename: `${clientInfo.firstName}_${clientInfo.lastName}-photoId.jpg`,
-        content: clientInfo.photoIdBase64,
+        content: clientInfo.photoIdBase64 || "",
         contentType: "image/jpeg",
         encoding: "base64",
       },
       {
         filename: `WaiverForm-${clientInfo.firstName}_${clientInfo.lastName}.pdf`,
-        content: clientInfo.pdfBase64,
+        content: clientInfo.pdfBase64 || "",
         contentType: "application/pdf",
         encoding: "base64",
       },
