@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   });
 
   const attachments = [
-    clientInfo.profileBase64
+    !!clientInfo.profileBase64
       ? {
           filename: `${clientInfo.firstName}_${clientInfo.lastName}-profile.jpg`,
           content: clientInfo.profileBase64 || "",
@@ -50,7 +50,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
           encoding: "base64",
         }
       : null,
-    clientInfo.photoIdBase64
+    !!clientInfo.photoIdBase64
       ? {
           filename: `${clientInfo.firstName}_${clientInfo.lastName}-photoId.jpg`,
           content: clientInfo.photoIdBase64 || "",
