@@ -40,6 +40,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       pass: password,
     },
   });
+
+  const attachments = [
+    clientInfo.profileBase64
+      ? {
+          filename: `${clientInfo.firstName}_${clientInfo.lastName}-profile.jpg`,
+          content: clientInfo.profileBase64 || "",
+          contentType: "image/jpeg",
+          encoding: "base64",
+        }
+      : null,
+    clientInfo.photoIdBase64
+      ? {
+          filename: `${clientInfo.firstName}_${clientInfo.lastName}-photoId.jpg`,
+          content: clientInfo.photoIdBase64 || "",
+          contentType: "image/jpeg",
+          encoding: "base64",
+        }
+      : null,
+    {
+      filename: `WaiverForm-${clientInfo.firstName}_${clientInfo.lastName}.pdf`,
+      content: clientInfo.pdfBase64 || "",
+      contentType: "application/pdf",
+      encoding: "base64",
+    },
+  ].filter((attc) => attc);
   const html = `
   <div>
     <p style="font-size:1.1rem">
@@ -75,26 +100,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     Date of Birth: ${clientInfo.dateOfBirth}
     `,
     html,
-    attachments: [
-      {
-        filename: `${clientInfo.firstName}_${clientInfo.lastName}-profile.jpg`,
-        content: clientInfo.profileBase64 || "",
-        contentType: "image/jpeg",
-        encoding: "base64",
-      },
-      {
-        filename: `${clientInfo.firstName}_${clientInfo.lastName}-photoId.jpg`,
-        content: clientInfo.photoIdBase64 || "",
-        contentType: "image/jpeg",
-        encoding: "base64",
-      },
-      {
-        filename: `WaiverForm-${clientInfo.firstName}_${clientInfo.lastName}.pdf`,
-        content: clientInfo.pdfBase64 || "",
-        contentType: "application/pdf",
-        encoding: "base64",
-      },
-    ],
+    attachments,
   };
   try {
     await transporter.sendMail(message);
