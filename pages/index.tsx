@@ -3,34 +3,6 @@ import Image from "next/image";
 import axios from "axios";
 import { useState } from "react";
 export default function Home() {
-  const [dd, setDD] = useState("");
-  const handleTest = async () => {
-    const JSONd = {
-      host: "smtp.gmail.com",
-      email: "arthur.lee945@gmail.com",
-      password: "aubfiedjawgamcrv",
-      designatedEmail: "jlee24281@gmail.com",
-      clientInfo: {
-        firstName: "My First Name",
-        lastName: "Test LN",
-        email: "email@email.com",
-        phoneNumber: "235097235",
-        dateOfBirth: "1111-07-11",
-      },
-    };
-    const postConfig = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `bearer YJno97HwDgw3Cq9LzRgT`,
-      },
-    };
-    try {
-      const data = await axios.post("https://iron-wolf-backend.vercel.app/api/send-mail", JSONd, postConfig);
-      setDD(JSON.stringify(data, null, 2));
-    } catch (err) {
-      setDD(JSON.stringify(err, null, 2));
-    }
-  };
   return (
     <>
       <Head>
@@ -51,10 +23,6 @@ export default function Home() {
             </a>
           </p>
         </div>
-        {/* <button style={{ zIndex: 2 }} onClick={handleTest}>
-          Test
-        </button>
-        <pre style={{ width: "100%" }}>{dd}</pre> */}
       </main>
     </>
   );
