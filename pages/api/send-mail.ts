@@ -11,7 +11,7 @@ type submissionProps = {
   email: string;
   phoneNumber: string;
   dateOfBirth: string;
-  cash: string;
+  cash: boolean;
   memberName: string;
   profileBase64: string;
   photoIdBase64: string;
@@ -90,10 +90,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     </p>
   <hr>
     <p style="font-size:1.1rem">
-      Cash: <b>${clientInfo.cash === "true" ? "True" : "False"}</b>
+      Cash: <b>${clientInfo.cash ? "True" : "False"}</b>
     </p>
   ${
-    clientInfo.cash === "false"
+    !clientInfo.cash
       ? `  <hr>
   <p style="font-size:1.1rem">
     Cash: <b>${clientInfo.cash}</b>
@@ -112,8 +112,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     Email: ${clientInfo.email}
     Phone Number: ${clientInfo.phoneNumber}
     Date of Birth: ${clientInfo.dateOfBirth}
-    Cash: ${clientInfo.cash === "true" ? "True" : "False"}
-    ${clientInfo.cash === "false" ? `Member Name: ${clientInfo.memberName}` : ""}
+    Cash: ${clientInfo.cash ? "True" : "False"}
+    ${!clientInfo.cash ? `Member Name: ${clientInfo.memberName}` : ""}
     `,
     html,
     attachments,
