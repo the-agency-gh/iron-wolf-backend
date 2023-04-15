@@ -11,6 +11,8 @@ type submissionProps = {
   email: string;
   phoneNumber: string;
   dateOfBirth: string;
+  cash: string;
+  memberName: string;
   profileBase64: string;
   photoIdBase64: string;
   pdfBase64: string;
@@ -68,24 +70,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const html = `
   <div>
     <p style="font-size:1.1rem">
-    First Name: <b>${clientInfo.firstName}</b>
+      First Name: <b>${clientInfo.firstName}</b>
     </p>
   <hr>
     <p style="font-size:1.1rem">
-    Last Name: <b>${clientInfo.lastName}</b>
+      Last Name: <b>${clientInfo.lastName}</b>
     </p>
   <hr>
     <p style="font-size:1.1rem">
-    Email: <b>${clientInfo.email}</b>
+      Email: <b>${clientInfo.email}</b>
     </p>
   <hr>
     <p style="font-size:1.1rem">
-    Phone Number: <b>${clientInfo.phoneNumber}</b>
+      Phone Number: <b>${clientInfo.phoneNumber}</b>
     </p>
   <hr>
     <p style="font-size:1.1rem">
-    Date of Birth: <b>${clientInfo.dateOfBirth}</b>
+      Date of Birth: <b>${clientInfo.dateOfBirth}</b>
     </p>
+  <hr>
+    <p style="font-size:1.1rem">
+      Cash: <b>${clientInfo.cash === "1" ? "True" : "False"}</b>
+    </p>
+  ${
+    clientInfo.cash === "0"
+      ? `  <hr>
+  <p style="font-size:1.1rem">
+    Cash: <b>${clientInfo.cash}</b>
+  </p>`
+      : ""
+  }
   </div>
   `;
   const message = {
@@ -98,6 +112,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     Email: ${clientInfo.email}
     Phone Number: ${clientInfo.phoneNumber}
     Date of Birth: ${clientInfo.dateOfBirth}
+    Cash: ${clientInfo.cash === "1" ? "True" : "False"}
+    ${clientInfo.cash === "0" ? `Member Name: ${clientInfo.memberName}` : ""}
     `,
     html,
     attachments,
