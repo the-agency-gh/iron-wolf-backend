@@ -96,7 +96,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     !clientInfo.cash
       ? `  <hr>
   <p style="font-size:1.1rem">
-    Cash: <b>${clientInfo.cash}</b>
+    Member Name: <b>${clientInfo.memberName}</b>
   </p>`
       : ""
   }
