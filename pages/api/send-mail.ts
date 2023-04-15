@@ -90,10 +90,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     </p>
   <hr>
     <p style="font-size:1.1rem">
-      Cash: <b>${clientInfo.cash === "1" ? "True" : "False"}</b>
+      Cash: <b>${clientInfo.cash === "true" ? "True" : "False"}</b>
     </p>
   ${
-    clientInfo.cash === "0"
+    clientInfo.cash === "false"
       ? `  <hr>
   <p style="font-size:1.1rem">
     Cash: <b>${clientInfo.cash}</b>
@@ -112,8 +112,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     Email: ${clientInfo.email}
     Phone Number: ${clientInfo.phoneNumber}
     Date of Birth: ${clientInfo.dateOfBirth}
-    Cash: ${clientInfo.cash === "1" ? "True" : "False"}
-    ${clientInfo.cash === "0" ? `Member Name: ${clientInfo.memberName}` : ""}
+    Cash: ${clientInfo.cash === "true" ? "True" : "False"}
+    ${clientInfo.cash === "false" ? `Member Name: ${clientInfo.memberName}` : ""}
     `,
     html,
     attachments,
