@@ -103,14 +103,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         to: designatedEmail,
         subject: `Waiver From Submission - ${clientInfo.firstName} ${clientInfo.lastName}`,
         text: `
-    First Name: ${clientInfo.firstName}
-    Last Name: ${clientInfo.lastName}
-    Email: ${clientInfo.email}
-    Phone Number: ${clientInfo.phoneNumber}
-    Date of Birth: ${clientInfo.dateOfBirth}
-    Cash: ${clientInfo.cash ? "True" : "False"}
-    Member Name: ${clientInfo.memberName}
-    `,
+        First Name: ${clientInfo.firstName}
+        Last Name: ${clientInfo.lastName}
+        Email: ${clientInfo.email}
+        Phone Number: ${clientInfo.phoneNumber}
+        Date of Birth: ${clientInfo.dateOfBirth}
+        Cash: ${clientInfo.cash ? "True" : "False"}
+        Member Name: ${clientInfo.memberName}
+        `,
         html,
         attachments,
     };
