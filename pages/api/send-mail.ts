@@ -94,7 +94,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     </p>
     <hr>
     <p style="font-size:1.1rem">
-      Member Name: <b>${clientInfo.memberName}</b>
+      Member Name: <b>${clientInfo.memberName || "Unknown"}</b>
     </p>
   </div>
   `;
@@ -109,7 +109,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         Phone Number: ${clientInfo.phoneNumber}
         Date of Birth: ${clientInfo.dateOfBirth}
         Cash: ${clientInfo.cash ? "True" : "False"}
-        Member Name: ${clientInfo.memberName}
+        Member Name: ${clientInfo.memberName || "Unknown"}
         `,
         html,
         attachments,
