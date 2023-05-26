@@ -15,6 +15,7 @@ type submissionProps = {
     memberName: string;
     profileBase64: string;
     photoIdBase64: string;
+    guardianPhotoIdBase64: string;
     pdfBase64: string;
 };
 type reqBody = {
@@ -56,6 +57,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             ? {
                   filename: `${clientInfo.firstName}_${clientInfo.lastName}-photoId.jpg`,
                   content: clientInfo.photoIdBase64 || "",
+                  contentType: "image/jpeg",
+                  encoding: "base64",
+              }
+            : null,
+        !!clientInfo.guardianPhotoIdBase64
+            ? {
+                  filename: `${clientInfo.firstName}_${clientInfo.lastName}-photoId.jpg`,
+                  content: clientInfo.guardianPhotoIdBase64 || "",
                   contentType: "image/jpeg",
                   encoding: "base64",
               }
