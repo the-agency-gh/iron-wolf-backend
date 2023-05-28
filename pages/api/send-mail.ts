@@ -117,7 +117,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         Email: ${clientInfo.email}
         Phone Number: ${clientInfo.phoneNumber}
         Date of Birth: ${clientInfo.dateOfBirth}
-        Cash: ${clientInfo.cash ? "True" : "False"}
+        ${clientInfo.cash ? "Charge Cash" : "Charge Member"}
         Member Name: ${clientInfo.memberName || "Unknown"}
         `,
         html,
